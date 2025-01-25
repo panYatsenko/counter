@@ -4,28 +4,32 @@ const decrease = document.getElementById("decrease");
 const reset = document.getElementById("reset");
 const increase = document.getElementById("increase");
 
-if (value.textContent === "0") {
-  value.style.color = "black";
-} else if (value.textContent < 0) {
-  value.style.color = "red";
-} else if (value.textContent > 0) {
-  value.style.color = "green";
+function updateColor() {
+  if (parseInt(value.textContent) === 0) {
+    value.style.color = "black";
+  } else if (parseInt(value.textContent) >= 1) {
+    value.style.color = "green";
+  } else {
+    value.style.color = "red";
+  }
 }
 
-function increaseValue() {
-  let currentValue = parseInt(value.textContent);
-  currentValue++;
-  value.textContent = currentValue;
-  value.style.color = "green";
-}
-
-increase.addEventListener("click", increaseValue);
-
-function decreaseValue() {
+decrease.addEventListener("click", function () {
   let currentValue = parseInt(value.textContent);
   currentValue--;
   value.textContent = currentValue;
-  value.style.color = "red";
-}
+  updateColor();
+});
 
-decrease.addEventListener("click", decreaseValue);
+reset.addEventListener("click", function () {
+  let currentVallue = 0;
+  value.textContent = currentVallue;
+  updateColor();
+});
+
+increase.addEventListener("click", function () {
+  let currentValue = parseInt(value.textContent);
+  currentValue++;
+  value.textContent = currentValue;
+  updateColor();
+});
